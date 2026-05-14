@@ -219,8 +219,12 @@ User feedback: "I feel like the whole site is just center aligned." Converted th
 ## Typography (script font swap)
 Caveat Brush → **Style Script** for all script accents ("Zero compromise.", "aren't", "+" coda signs, "Digital Empathy" footer credit). Style Script is more elegant calligraphy than Caveat Brush's chunky brush style. `--font-script` token updated; font link updated on all 4 pages.
 
+## Logo recolor experiment (2026-05-14) — rejected
+Tried recoloring the white parts of the logo to navy for use on section 2's cream background (since the white wordmark + cat silhouette read poorly on cream). First pass recolored all white pixels uniformly — but the "Conference" script overlapped dark disc bands and lost contrast against them (navy-on-navy). Second pass used Y-coordinate masking: only top 40% (wordmark) + bottom 20% (cat) recolored, middle (script) left white. User rejected the result. Reverted section 2 `<img>` to the original `rcvc logo.png`. The recolored `rcvc-logo-navy.png` was deleted (not committed). Move forward with the original logo on cream; revisit treatment later if needed.
+
 ## Open concerns / next session
 - Earlier in 2026-05-14 the user flagged: site was "starting to feel like a political site / corp / someone running for office." Addressed via the section 3 rebuild + softening of slab+numeral combinations, but worth keeping on the radar.
+- **Next session (2026-05-15+): redo the other 3 pages — `conference.html`, `sponsors.html`, `faqs.html` — using the new elements created on the homepage** (cinematic video hero pattern, sticky-logo split + dropcap + bloomed pull-quote, full-bleed cinematic section pattern, 3-col amenity grid, full-bleed overlay band, split feature-band, Style Script accents, horizon-stripe transitions). The inner pages currently use the older centered/templated patterns and need to be brought up to the homepage's bar.
 
 ## Pending Tasks
 - User review of all 4 pages in browser at `localhost:4321`
