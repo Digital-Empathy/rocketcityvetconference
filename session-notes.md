@@ -196,6 +196,29 @@ Strategy that landed: video as medium (motion brings life that no static layout 
 ## Scroll-driven bloom (pull-quote, section 2)
 The pull-quote in "Why this conference exists" now blooms on scroll. As its center crosses near the viewport center, it scales to 2x and translates horizontally to land at viewport-center. Once triggered, it STAYS bloomed (no retract on continued scroll). The sticky logo in section 2 simultaneously dims out (opacity 0 + slight scale + translate) so the giant quote doesn't overlap the logo. Math uses `offsetTop`/`offsetLeft` (transform-immune) so the bloom doesn't fight itself. Respects `prefers-reduced-motion`.
 
+Two-state margins: small (2.5–4rem) when not bloomed so section 2 reads at its natural rhythm; large (9–16rem each side) when `.is-bloomed` to absorb the 2x visual growth without overlapping the paragraph above. Margin transitions in sync with the transform.
+
+## Section 3 final shape (2026-05-14) — cinematic video hero
+After many iterations (3-up cards → sticky-photo split → centered manifesto with Roman numerals → editorial + inset photo → CSS-built rising sun + Saturn V SVG → off-axis real-logo composition → scrollytelling sticky photo → Wandawega/XOXO A/B → layered video composition), landed on a **full-bleed cinematic video hero** treatment for section 3 (Who It's For). User feedback: "this is supposed to really sell it" — pivoted from quiet layered comp to a confident second-hero moment.
+
+- Section is full-viewport-height (clamp 720px–980px)
+- Full-bleed looping video as background (`assets/video/whois-attendee.mp4`, Pexels 8716583, 12s)
+- 72% navy scrim for confident text contrast
+- Massive Coustard headline (clamp 2.8–5.8rem) broken across three lines with a Style Script "aren't" accent in coral
+- 88px orange rule below headline
+- Body copy + "Bring your team" coda overlaid in a left-aligned column with text-shadows for legibility
+
+Reads as a "second hero" of the page — identity hero, parallel to the event-info cinematic hero at section 1.
+
+## Ledger → amenity grid (2026-05-14)
+User feedback: "I feel like the whole site is just center aligned." Converted the vertical `.ledger` (stacked rows with 2-col content) into a **3-column grid** (`.amenity-grid`). Each cell stacks: small uppercase label → Coustard headline → coral rule (grows on hover) → body. Hairlines between cells via grid borders, none on the outer edges. Collapses to 2-col then 1-col responsively. Adds horizontal alignment variety the page didn't have.
+
+## Founder link
+`Dr. Rebecca Sweet` in section 2 now links to https://greencovepet.com/team/. Link URL lives in `config.js` as `founderLink` for annual-rotation safety. Opens in new tab with `rel="noopener"`.
+
+## Typography (script font swap)
+Caveat Brush → **Style Script** for all script accents ("Zero compromise.", "aren't", "+" coda signs, "Digital Empathy" footer credit). Style Script is more elegant calligraphy than Caveat Brush's chunky brush style. `--font-script` token updated; font link updated on all 4 pages.
+
 ## Open concerns / next session
 - Earlier in 2026-05-14 the user flagged: site was "starting to feel like a political site / corp / someone running for office." Addressed via the section 3 rebuild + softening of slab+numeral combinations, but worth keeping on the radar.
 

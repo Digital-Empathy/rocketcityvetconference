@@ -7,7 +7,7 @@
   <meta name="description" content="A RACE-approved one-day veterinary CE conference in Huntsville, Alabama. Built for solo and small-practice doctors who can't take a week off.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Coustard&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Caveat+Brush&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Coustard&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Style+Script&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="icon" type="image/png" href="assets/img/logo/rcvc logo.png">
 </head>
@@ -77,7 +77,7 @@
       <span class="eyebrow"><span class="dot"></span> Why this conference exists</span>
       <h2 class="text-balance">She didn't set out to start a conference. She set out to fix one.</h2>
       <p class="lede mt-6 dropcap">
-        A few years ago, {{founderName}}, a solo veterinarian and practice owner with a
+        A few years ago, <a href="{{founderLink}}" target="_blank" rel="noopener">{{founderName}}</a>, a solo veterinarian and practice owner with a
         six-month-old nursing baby, took her infant and her mother across state lines to
         fulfill Alabama's in-person CE requirement, which makes no exception for childbirth.
         She spent the conference running between the lecture hall and her hotel room,
@@ -106,36 +106,30 @@
 </div>
 
 <!-- ============================================================
-     SECTION 3: WHO IT'S FOR (layered video composition)
-     A looping intimate clip of an attendee writing/listening sits
-     as a vertical "window" on the right. The headline OVERLAPS the
-     top of the video — type and motion interact spatially, not as
-     stacked rows. Body flows in front of the video on the left.
+     SECTION 3: WHO IT'S FOR (cinematic full-bleed video hero)
+     A second hero moment — sells identity. Full-bleed loop of an
+     intimate attendee moment + massive Coustard headline + Caveat
+     Brush "aren't" accent. Body copy + "Bring your team" coda all
+     live overlaid in a confident left-aligned column.
 ============================================================ -->
-<section class="section section--navy whois">
-  <div class="container whois__stage">
-    <!-- The video plays as a portrait window, anchored right -->
-    <div class="whois__window">
-      <video class="whois__video" autoplay muted loop playsinline preload="metadata">
-        <source src="assets/video/whois-attendee.mp4" type="video/mp4">
-      </video>
-      <div class="whois__window-scrim" aria-hidden="true"></div>
-    </div>
+<section class="whois">
+  <video class="whois__video" autoplay muted loop playsinline preload="metadata">
+    <source src="assets/video/whois-attendee.mp4" type="video/mp4">
+  </video>
+  <div class="whois__scrim" aria-hidden="true"></div>
 
-    <!-- The headline crosses over the top of the video on the right edge -->
-    <div class="whois__headline reveal">
-      <span class="eyebrow"><span class="dot"></span> Who it&rsquo;s for</span>
-      <h2 class="whois__head">Built<br>for the people<br>most conferences<br><span class="script">aren&rsquo;t</span>.</h2>
-    </div>
-
-    <!-- Body sits below the headline, in front-left of the video -->
-    <div class="whois__body reveal">
-      <p>Rocket City is built for the veterinarians most conferences quietly aren't designed for: solo doctors, small-practice owners, and anyone running an independent hospital where four days away means the practice closes, or means paying a relief vet to see a fraction of your normal caseload.</p>
-      <p>It's also built around a vendor hall that won't recruit your staff out from under you. Corporate chains and recruiting firms aren't invited. The vendors at Rocket City are there to show you new equipment, new tools, and new technology, not to walk away with your associate at lunch.</p>
-    </div>
-
-    <aside class="whois__coda reveal">
-      <p><span class="script">+&nbsp;</span><strong>Bring your team.</strong> &nbsp;Licensed vet techs, practice managers, and support staff are welcome. Because lectures are RACE-approved at the doctor level, your LVTs will earn all eight hours of their annual Alabama CE requirement in one Saturday. The content itself is written for veterinarians. Come knowing that, and the day works for everyone.</p>
+  <div class="container whois__content reveal">
+    <span class="eyebrow"><span class="dot"></span> Who it&rsquo;s for</span>
+    <h2 class="whois__head">
+      <span class="whois__line">Built for the people</span>
+      <span class="whois__line">most conferences</span>
+      <span class="whois__line"><span class="script">aren&rsquo;t</span>.</span>
+    </h2>
+    <div class="whois__rule" aria-hidden="true"></div>
+    <p class="whois__body">Rocket City is built for the veterinarians most conferences quietly aren't designed for: solo doctors, small-practice owners, and anyone running an independent hospital where four days away means the practice closes, or means paying a relief vet to see a fraction of your normal caseload.</p>
+    <p class="whois__body">It's also built around a vendor hall that won't recruit your staff out from under you. Corporate chains and recruiting firms aren't invited. The vendors at Rocket City are there to show you new equipment, new tools, and new technology, not to walk away with your associate at lunch.</p>
+    <aside class="whois__coda">
+      <p><span class="script">+&nbsp;</span><strong>Bring your team.</strong>&nbsp; Licensed vet techs, practice managers, and support staff are welcome. Because lectures are RACE-approved at the doctor level, your LVTs will earn all eight hours of their annual Alabama CE requirement in one Saturday. The content itself is written for veterinarians. Come knowing that, and the day works for everyone.</p>
     </aside>
   </div>
 </section>
@@ -161,59 +155,47 @@
       </p>
     </div>
 
-    <ol class="ledger mt-8">
-      <li class="ledger__row reveal">
-        <span class="ledger__label">Seating</span>
-        <div class="ledger__content">
-          <h3 class="ledger__head">Real chairs at real tables.</h3>
-          <div class="ledger__rule" aria-hidden="true"></div>
-          <p class="ledger__body">Not chairs in a row with a notepad in your lap. Eight hours is a long time to sit.</p>
-        </div>
+    <ol class="amenity-grid mt-8 reveal-stagger">
+      <li class="amenity-grid__cell reveal" style="--i: 0;">
+        <span class="amenity-grid__label">Seating</span>
+        <h3 class="amenity-grid__head">Real chairs at real tables.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+        <p class="amenity-grid__body">Not chairs in a row with a notepad in your lap. Eight hours is a long time to sit.</p>
       </li>
 
-      <li class="ledger__row reveal">
-        <span class="ledger__label">The Meal</span>
-        <div class="ledger__content">
-          <h3 class="ledger__head">Hot lunch, never a box.</h3>
-          <div class="ledger__rule" aria-hidden="true"></div>
-          <p class="ledger__body">Real meals, planned around dietary needs you don't have to remind anyone about.</p>
-        </div>
+      <li class="amenity-grid__cell reveal" style="--i: 1;">
+        <span class="amenity-grid__label">The Meal</span>
+        <h3 class="amenity-grid__head">Hot lunch, never a box.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+        <p class="amenity-grid__body">Real meals, planned around dietary needs you don't have to remind anyone about.</p>
       </li>
 
-      <li class="ledger__row reveal">
-        <span class="ledger__label">Swag</span>
-        <div class="ledger__content">
-          <h3 class="ledger__head">A swag bag worth taking home.</h3>
-          <div class="ledger__rule" aria-hidden="true"></div>
-          <p class="ledger__body">A handpicked-soft t-shirt with "you're worth it" on the back, an encouragement notebook, antibac that comes with a note, and a soy candle with a label only a veterinarian will laugh at. The most recent one was "smells better than the next dumpster fire."</p>
-        </div>
+      <li class="amenity-grid__cell reveal" style="--i: 2;">
+        <span class="amenity-grid__label">Swag</span>
+        <h3 class="amenity-grid__head">A swag bag worth taking home.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+        <p class="amenity-grid__body">A handpicked-soft t-shirt with "you're worth it" on the back, an encouragement notebook, antibac that comes with a note, and a soy candle with a label only a veterinarian will laugh at. The most recent one was "smells better than the next dumpster fire."</p>
       </li>
 
-      <li class="ledger__row reveal">
-        <span class="ledger__label">Care Stations</span>
-        <div class="ledger__content">
-          <h3 class="ledger__head">Care stations in the bathrooms.</h3>
-          <div class="ledger__rule" aria-hidden="true"></div>
-          <p class="ledger__body">Deodorant, dental floss, lint roller, Tide wipes, mints, body spray. The sign reads: you deserve a stress-free day.</p>
-        </div>
+      <li class="amenity-grid__cell reveal" style="--i: 3;">
+        <span class="amenity-grid__label">Care Stations</span>
+        <h3 class="amenity-grid__head">Care stations in the bathrooms.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+        <p class="amenity-grid__body">Deodorant, dental floss, lint roller, Tide wipes, mints, body spray. The sign reads: you deserve a stress-free day.</p>
       </li>
 
-      <li class="ledger__row reveal">
-        <span class="ledger__label">For Parents</span>
-        <div class="ledger__content">
-          <h3 class="ledger__head">A private mother&rsquo;s room.</h3>
-          <div class="ledger__rule" aria-hidden="true"></div>
-          <p class="ledger__body">With a fridge for milk storage. The alternative is exactly what got Rocket City started in the first place.</p>
-        </div>
+      <li class="amenity-grid__cell reveal" style="--i: 4;">
+        <span class="amenity-grid__label">For Parents</span>
+        <h3 class="amenity-grid__head">A private mother&rsquo;s room.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+        <p class="amenity-grid__body">With a fridge for milk storage. The alternative is exactly what got Rocket City started in the first place.</p>
       </li>
 
-      <li class="ledger__row ledger__row--feature reveal">
-        <span class="ledger__label">All Day</span>
-        <div class="ledger__content">
-          <h3 class="ledger__head">Breakfast, lunch, snacks, coffee, water all day.</h3>
-          <div class="ledger__rule" aria-hidden="true"></div>
-          <p class="ledger__body">Bring nothing but yourself. Plus an optional end-of-day social with food and drinks if you want to stay.</p>
-        </div>
+      <li class="amenity-grid__cell reveal" style="--i: 5;">
+        <span class="amenity-grid__label">All Day</span>
+        <h3 class="amenity-grid__head">Breakfast, lunch, snacks, coffee, water all day.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+        <p class="amenity-grid__body">Bring nothing but yourself. Plus an optional end-of-day social with food and drinks if you want to stay.</p>
       </li>
     </ol>
   </div>

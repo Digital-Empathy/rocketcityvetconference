@@ -30,5 +30,6 @@ window.RCVC_CONFIG = {
   sponsorEmail: 'sponsors@rocketcityvetconference.com',
 
   founderName: 'Dr. Rebecca Sweet',
-  founderFirst: 'Rebecca'
+  founderFirst: 'Rebecca',
+  founderLink: 'https://greencovepet.com/team/'
 };

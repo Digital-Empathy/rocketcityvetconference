@@ -26,7 +26,7 @@
   /* Typography */
   --font-display: 'Coustard', 'Bree Serif', 'Rockwell', 'Georgia', serif;
   --font-quote:   'Fraunces', 'Times New Roman', Georgia, serif;
-  --font-script:  'Caveat Brush', 'Brush Script MT', cursive;
+  --font-script:  'Style Script', 'Brush Script MT', cursive;
   --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Layout */
@@ -765,6 +765,86 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
 .card--feature:hover .card__icon-svg { color: var(--sunset-cream); }
 
 /* ============================================================
+   AMENITY GRID (homepage "didn't have to ask for" — 3-col layout)
+   Each cell is a type-stack: label + headline + rule + body.
+   No boxes. Hairline rules between cells via grid borders.
+============================================================ */
+
+.amenity-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(45, 91, 124, 0.20);
+}
+.amenity-grid__cell {
+  padding: clamp(2rem, 3.5vw, 3rem) clamp(1.25rem, 2vw, 1.75rem);
+  border-bottom: 1px solid rgba(45, 91, 124, 0.20);
+  border-right: 1px solid rgba(45, 91, 124, 0.20);
+  display: flex;
+  flex-direction: column;
+}
+.amenity-grid__cell:first-child,
+.amenity-grid__cell:nth-child(3n + 1) {
+  padding-left: 0;
+}
+.amenity-grid__cell:nth-child(3n) {
+  padding-right: 0;
+  border-right: 0;
+}
+.amenity-grid__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sunset-orange-deep);
+  margin: 0 0 var(--s-3);
+}
+.amenity-grid__head {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  letter-spacing: -0.012em;
+  line-height: 1.06;
+  margin: 0 0 var(--s-2);
+  color: var(--deep-navy);
+  text-wrap: balance;
+}
+.amenity-grid__rule {
+  width: 32px;
+  height: 2px;
+  background: var(--sunset-coral);
+  margin: 0 0 var(--s-3);
+  transition: width 0.45s var(--ease), background 0.3s var(--ease);
+}
+.amenity-grid__cell:hover .amenity-grid__rule {
+  width: 64px;
+  background: var(--sunset-red);
+}
+.amenity-grid__body {
+  font-size: clamp(0.96rem, 1.15vw, 1.05rem);
+  line-height: 1.55;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+@media (max-width: 880px) {
+  .amenity-grid { grid-template-columns: 1fr 1fr; }
+  .amenity-grid__cell:nth-child(3n + 1) { padding-left: clamp(1.25rem, 2vw, 1.75rem); }
+  .amenity-grid__cell:nth-child(3n) { padding-right: clamp(1.25rem, 2vw, 1.75rem); border-right: 1px solid rgba(45, 91, 124, 0.20); }
+  .amenity-grid__cell:nth-child(2n + 1) { padding-left: 0; }
+  .amenity-grid__cell:nth-child(2n) { padding-right: 0; border-right: 0; }
+}
+@media (max-width: 540px) {
+  .amenity-grid { grid-template-columns: 1fr; }
+  .amenity-grid__cell { border-right: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
+}
+
+/* ============================================================
    LEDGER (homepage amenities — editorial stacked list, no boxes)
    Big Fraunces statements stacked vertically.
    Small uppercase label on the left, big headline + rule + body on the right.
@@ -1161,107 +1241,89 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
 }
 
 /* ============================================================
-   Section 3: Who It's For (layered video composition)
-   The video is a portrait "window" anchored to the right. The
-   headline crosses over its top. Body sits front-left of the
-   video. Type and motion interact spatially.
+   Section 3: Who It's For (cinematic full-bleed video hero)
+   Second hero moment of the page. Sells identity through scale +
+   motion. Full-bleed video, heavy navy scrim, massive Coustard
+   overlay with Caveat Brush "aren't" accent.
 ============================================================ */
 
-.whois { position: relative; isolation: isolate; }
-.whois__stage {
+.whois {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr clamp(320px, 38vw, 480px);
-  grid-template-rows: auto auto auto;
-  column-gap: clamp(-3rem, -2vw, -1rem); /* negative gap = overlap */
-  row-gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: start;
-}
-
-.whois__window {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  position: relative;
-  width: 100%;
-  height: clamp(440px, 62vw, 640px);
-  border-radius: var(--radius-lg);
+  min-height: clamp(720px, 92vh, 980px);
+  display: flex;
+  align-items: center;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
-  z-index: 0;
-  align-self: start;
+  isolation: isolate;
+  background: var(--deep-navy);
+  padding: clamp(5rem, 9vw, 7rem) 0;
 }
 .whois__video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  filter: saturate(0.85) contrast(1.05);
+  z-index: 0;
+  filter: saturate(0.78) contrast(1.08);
 }
-.whois__window-scrim {
+.whois__scrim {
   position: absolute;
   inset: 0;
-  background: rgba(15, 29, 47, 0.20);
-  pointer-events: none;
+  z-index: 1;
+  background: rgba(15, 29, 47, 0.72);
 }
-
-/* Headline lives in column 1, but extends into column 2 — overlapping the video's top */
-.whois__headline {
-  grid-column: 1 / -1;
-  grid-row: 1;
+.whois__content {
   position: relative;
   z-index: 2;
-  max-width: none;
-  pointer-events: none;
-}
-.whois__headline > * { pointer-events: auto; }
-.whois__head {
-  font-size: clamp(2.6rem, 6.8vw, 5.4rem);
+  max-width: 960px;
   color: var(--sunset-cream-soft);
-  line-height: 0.96;
-  letter-spacing: -0.022em;
-  margin: var(--s-3) 0 0;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
 }
+.whois__head {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 7.4vw, 5.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.022em;
+  color: var(--sunset-cream);
+  margin: var(--s-3) 0 var(--s-4);
+  text-shadow: 0 3px 28px rgba(0, 0, 0, 0.55);
+}
+.whois__line { display: block; }
 .whois__head .script {
   font-family: var(--font-script);
   font-weight: 400;
   color: var(--sunset-orange);
-  font-size: 1.1em;
+  font-size: 1.08em;
   display: inline-block;
-  transform: translateY(0.05em);
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(0.06em);
+  text-shadow: 0 3px 28px rgba(0, 0, 0, 0.50);
 }
-
+.whois__rule {
+  width: 88px;
+  height: 3px;
+  background: var(--sunset-orange);
+  margin: var(--s-4) 0 var(--s-5);
+}
 .whois__body {
-  grid-column: 1;
-  grid-row: 2;
-  position: relative;
-  z-index: 1;
-  max-width: 30em;
-}
-.whois__body p {
-  color: rgba(244, 232, 208, 0.88);
-  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  font-size: clamp(1.08rem, 1.45vw, 1.28rem);
   line-height: 1.6;
-  margin: 0 0 var(--s-3);
+  color: rgba(244, 232, 208, 0.92);
+  max-width: 36em;
+  margin: 0 0 var(--s-4);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
-.whois__body p:last-child { margin-bottom: 0; }
-
 .whois__coda {
-  grid-column: 1 / -1;
-  grid-row: 3;
-  margin-top: var(--s-4);
+  margin-top: var(--s-6);
   padding-top: var(--s-4);
-  border-top: 1px solid rgba(244, 232, 208, 0.18);
-  position: relative;
-  z-index: 1;
+  border-top: 1px solid rgba(244, 232, 208, 0.22);
+  max-width: 46em;
 }
 .whois__coda p {
-  color: rgba(244, 232, 208, 0.82);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
+  color: rgba(244, 232, 208, 0.84);
   margin: 0;
-  max-width: 52em;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
 }
 .whois__coda strong { color: var(--sunset-orange); font-weight: 700; }
 .whois__coda .script {
@@ -1271,22 +1333,6 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
   color: var(--sunset-orange);
   display: inline-block;
   transform: translateY(0.1em);
-}
-
-@media (max-width: 880px) {
-  .whois__stage {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-    column-gap: 0;
-  }
-  .whois__headline { grid-column: 1; grid-row: 1; }
-  .whois__window {
-    grid-column: 1;
-    grid-row: 2;
-    height: 360px;
-  }
-  .whois__body { grid-column: 1; grid-row: 3; }
-  .whois__coda { grid-column: 1; grid-row: 4; }
 }
 
 /* ----- Section 2 layout: sticky logo + body ----- */
@@ -1333,19 +1379,27 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
 /* Scroll-triggered bloom: when the quote's center crosses near the
    viewport center, it scales 2x and translates horizontally to the
    screen center. ONCE triggered, it stays bloomed (no retract on
-   continued scroll). --bloom-x is set by JS at trigger time. */
+   continued scroll). --bloom-x is set by JS at trigger time.
+   Generous vertical margin reserves space for the scaled visual so
+   it doesn't overlap the paragraph above or section below. */
 .pull-quote--scroll-bloom {
   --bloom-x: 0px;
   --bloom-scale: 1;
   transform-origin: center center;
   transform: translateX(var(--bloom-x)) scale(var(--bloom-scale));
-  transition: transform 0.95s var(--ease);
+  transition: transform 0.95s var(--ease), margin 0.95s var(--ease);
   position: relative;
   z-index: 50;
   will-change: transform;
+  /* Pre-bloom: normal editorial spacing */
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .pull-quote--scroll-bloom.is-bloomed {
   --bloom-scale: 2;
+  /* Bloomed: enough vertical room for the 2x scaled visual */
+  margin-top: clamp(9rem, 18vw, 16rem);
+  margin-bottom: clamp(9rem, 18vw, 16rem);
 }
 @media (prefers-reduced-motion: reduce) {
   .pull-quote--scroll-bloom {
