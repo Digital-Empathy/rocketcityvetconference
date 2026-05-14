@@ -94,7 +94,7 @@
         around one question:
       </p>
 
-      <blockquote class="pull-quote pull-quote--left reveal">
+      <blockquote class="pull-quote pull-quote--left pull-quote--scroll-bloom">
         What would CE look like if it were built for the people who can&rsquo;t disappear for a week?
       </blockquote>
     </div>
@@ -106,39 +106,36 @@
 </div>
 
 <!-- ============================================================
-     SECTION 3: WHO IT'S FOR (centered type-only declaration)
+     SECTION 3: WHO IT'S FOR (layered video composition)
+     A looping intimate clip of an attendee writing/listening sits
+     as a vertical "window" on the right. The headline OVERLAPS the
+     top of the video — type and motion interact spatially, not as
+     stacked rows. Body flows in front of the video on the left.
 ============================================================ -->
-<section class="section section--navy">
-  <div class="container-tight manifesto-wrap reveal">
-    <span class="eyebrow eyebrow--centered" style="color: var(--sunset-orange);"><span class="dot"></span> Who it&rsquo;s for</span>
-    <h2 class="text-balance manifesto-wrap__head">Built for the people most conferences aren&rsquo;t.</h2>
-
-    <div class="manifesto-ornament" aria-hidden="true">
-      <span class="manifesto-ornament__line"></span>
-      <span class="manifesto-ornament__mark"></span>
-      <span class="manifesto-ornament__line"></span>
+<section class="section section--navy whois">
+  <div class="container whois__stage">
+    <!-- The video plays as a portrait window, anchored right -->
+    <div class="whois__window">
+      <video class="whois__video" autoplay muted loop playsinline preload="metadata">
+        <source src="assets/video/whois-attendee.mp4" type="video/mp4">
+      </video>
+      <div class="whois__window-scrim" aria-hidden="true"></div>
     </div>
 
-    <ol class="manifesto manifesto--paired">
-      <li class="manifesto__item">
-        <span class="manifesto__num" aria-hidden="true">I.</span>
-        <div class="manifesto__content">
-          <h3>Solo doctors and independent hospitals.</h3>
-          <p>Rocket City is built for the veterinarians most conferences quietly aren't designed for: solo doctors, small-practice owners, and anyone running an independent hospital where four days away means the practice closes, or means paying a relief vet to see a fraction of your normal caseload.</p>
-        </div>
-      </li>
-      <li class="manifesto__item">
-        <span class="manifesto__num" aria-hidden="true">II.</span>
-        <div class="manifesto__content">
-          <h3>A vendor hall that won&rsquo;t recruit your staff.</h3>
-          <p>It's also built around a vendor hall that won't recruit your staff out from under you. Corporate chains and recruiting firms aren't invited. The vendors at Rocket City are there to show you new equipment, new tools, and new technology, not to walk away with your associate at lunch.</p>
-        </div>
-      </li>
-    </ol>
+    <!-- The headline crosses over the top of the video on the right edge -->
+    <div class="whois__headline reveal">
+      <span class="eyebrow"><span class="dot"></span> Who it&rsquo;s for</span>
+      <h2 class="whois__head">Built<br>for the people<br>most conferences<br><span class="script">aren&rsquo;t</span>.</h2>
+    </div>
 
-    <aside class="manifesto__coda">
-      <h3>Bring your team.</h3>
-      <p>Licensed vet techs, practice managers, and support staff are welcome. Because lectures are RACE-approved at the doctor level, your LVTs will earn all eight hours of their annual Alabama CE requirement in one Saturday. The content itself is written for veterinarians. Come knowing that, and the day works for everyone.</p>
+    <!-- Body sits below the headline, in front-left of the video -->
+    <div class="whois__body reveal">
+      <p>Rocket City is built for the veterinarians most conferences quietly aren't designed for: solo doctors, small-practice owners, and anyone running an independent hospital where four days away means the practice closes, or means paying a relief vet to see a fraction of your normal caseload.</p>
+      <p>It's also built around a vendor hall that won't recruit your staff out from under you. Corporate chains and recruiting firms aren't invited. The vendors at Rocket City are there to show you new equipment, new tools, and new technology, not to walk away with your associate at lunch.</p>
+    </div>
+
+    <aside class="whois__coda reveal">
+      <p><span class="script">+&nbsp;</span><strong>Bring your team.</strong> &nbsp;Licensed vet techs, practice managers, and support staff are welcome. Because lectures are RACE-approved at the doctor level, your LVTs will earn all eight hours of their annual Alabama CE requirement in one Saturday. The content itself is written for veterinarians. Come knowing that, and the day works for everyone.</p>
     </aside>
   </div>
 </section>

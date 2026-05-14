@@ -107,6 +107,60 @@
     targets.forEach((el) => io.observe(el));
   }
 
+  /* Scroll-triggered bloom for the section 2 pull-quote.
+     Once the quote's center crosses near the viewport center, it scales
+     to 2x and translates horizontally to land at viewport-center, AND
+     stays bloomed (no retract). The sticky logo dims out so the bloomed
+     quote doesn't overlap it. */
+  function setupPullQuoteBloom() {
+    const quote = document.querySelector('.pull-quote--scroll-bloom');
+    if (!quote) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const mark = document.querySelector('.section--why__mark');
+    let bloomed = false;
+    let ticking = false;
+
+    function pageOffsets(el) {
+      let x = 0, y = 0, n = el;
+      while (n) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+      return { x, y };
+    }
+
+    const update = () => {
+      if (bloomed) { ticking = false; return; }
+
+      const off = pageOffsets(quote);
+      const h = quote.offsetHeight;
+      const cy = off.y - window.scrollY + h / 2;
+      const vh = window.innerHeight;
+      const distance = Math.abs(vh / 2 - cy);
+
+      // Trigger bloom when quote center is within 18% of viewport center
+      if (distance < vh * 0.18) {
+        const w = quote.offsetWidth;
+        const cx = off.x - window.scrollX + w / 2;
+        const xOffset = window.innerWidth / 2 - cx;
+        quote.style.setProperty('--bloom-x', `${xOffset}px`);
+        quote.classList.add('is-bloomed');
+        if (mark) mark.classList.add('is-dimmed');
+        bloomed = true;
+      }
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
     await loadIncludes();
     templateNode(document.body);
@@ -114,5 +168,6 @@
     applyRegisterState();
     document.body.classList.add('is-ready');
     setupRevealObserver();
+    setupPullQuoteBloom();
   });
 })();

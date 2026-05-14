@@ -175,8 +175,29 @@ Update `assets/js/config.js`. Every `{{key}}` on every page, including injected 
 - Pending Register pill is styled as a "save the date" stamp on dark backgrounds: transparent fill, orange outline, uppercase tracked text in orange, pulsing orange dot animation.
 - Footer compressed (padding s-10/s-5 → s-6/s-3, gap s-8 → s-5, logo 180px → 132px).
 
+## Section 3 long iteration history (2026-05-14)
+The "Built for the people most conferences aren't" section went through many redesigns. Final shape: **layered video composition** — a looping intimate clip of an attendee writing/listening sits as a portrait window on the right, the Coustard headline crosses over the top of the video (type and motion overlap spatially), body copy sits front-left, coda full-width below.
+
+Video asset: `assets/video/whois-attendee.mp4` (Pexels 8716583, 12s loop, ~6.2MB).
+Photo also downloaded but not currently used: `assets/img/photos/attendee-portrait.jpg` (Pexels 9391655). Kept for potential future reuse.
+
+Rejected iterations along the way (kept here so a future session doesn't re-try them):
+- 3-up card grid with banner image (bland)
+- Sticky-photo left + content right (mirrored section 2)
+- Centered manifesto with Roman numerals + diamond ornament (read as political/campaign-poster)
+- Editorial single-column with inset photo (felt like a magazine ad)
+- CSS-built rising sun masthead + Saturn V SVG (over-designed; user wanted the real logo)
+- Off-axis real-logo composition with drift animation (just not it)
+- Sticky photo + scrollytelling content blocks (mirrored section 2)
+- A/B comparison of Wandawega-style (tagline + asymmetric photo) and XOXO-style (pure typography) (still read as word-doc)
+
+Strategy that landed: video as medium (motion brings life that no static layout had) + overlap between headline and video (spatial, not stacked).
+
+## Scroll-driven bloom (pull-quote, section 2)
+The pull-quote in "Why this conference exists" now blooms on scroll. As its center crosses near the viewport center, it scales to 2x and translates horizontally to land at viewport-center. Once triggered, it STAYS bloomed (no retract on continued scroll). The sticky logo in section 2 simultaneously dims out (opacity 0 + slight scale + translate) so the giant quote doesn't overlap the logo. Math uses `offsetTop`/`offsetLeft` (transform-immune) so the bloom doesn't fight itself. Respects `prefers-reduced-motion`.
+
 ## Open concerns / next session
-- **User flagged 2026-05-14:** "it's nice but this is starting to feel like a political site/corp/someone running for office." Likely culprits to revisit: the chunky slab + Roman numerals + declarative voice may collectively read as campaign-y. Possible fixes: warmer/looser typography moment, hand-drawn or photographic flourishes, fewer hard rules + orange accents in succession, more hospitality and less manifesto.
+- Earlier in 2026-05-14 the user flagged: site was "starting to feel like a political site / corp / someone running for office." Addressed via the section 3 rebuild + softening of slab+numeral combinations, but worth keeping on the radar.
 
 ## Pending Tasks
 - User review of all 4 pages in browser at `localhost:4321`
