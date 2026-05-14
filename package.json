@@ -1,0 +1,10 @@
+{
+  "name": "rocket-city-vet-conference",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rocket City Vet Conference. Annual one-day veterinary CE event in Huntsville, Alabama.",
+  "scripts": {
+    "dev": "npx serve -p 4321",
+    "start": "npx serve -p 4321"
+  }
+}
