@@ -5,3 +5,7 @@ node_modules/
 *.log
 .env
 .env.local
+
+# Local QA artifacts (Playwright + screenshots)
+.playwright-cli/
+.screenshots/

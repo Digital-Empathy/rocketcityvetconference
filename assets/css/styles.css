@@ -180,8 +180,8 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
 .section--navy { background: var(--deep-navy); color: var(--sunset-cream-soft); }
 .section--navy h1, .section--navy h2, .section--navy h3 { color: var(--sunset-cream-soft); }
 .section--navy .lede, .section--navy .muted { color: rgba(244, 232, 208, 0.78); }
-.section--navy a { color: var(--sunset-orange); }
-.section--navy a:hover { color: var(--sunset-cream-soft); }
+.section--navy a:not(.btn) { color: var(--sunset-orange); }
+.section--navy a:not(.btn):hover { color: var(--sunset-cream-soft); }
 
 .section > .container,
 .section > .container-tight,
@@ -931,6 +931,339 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
 }
 
 /* ============================================================
+   SCHEDULE (animated vertical timeline)
+   Used on conference.html for the shape-of-the-day timetable.
+   Vertical coral-to-orange line down the left edge, dot per row,
+   staggered draw-in animation when section enters viewport.
+============================================================ */
+.schedule {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+/* The vertical timeline line — draws in on .is-visible */
+.schedule::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--sunset-coral) 0%,
+    var(--sunset-orange) 50%,
+    var(--sunset-coral) 100%
+  );
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.schedule.is-visible::before { transform: scaleY(1); }
+
+/* Schedule keeps the .reveal hook but stays visible itself — child
+   rows/dots/line handle the entrance animation instead. */
+.schedule.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.schedule__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: var(--s-3) var(--s-4);
+  align-items: baseline;
+  padding: 1.5rem 0 1.5rem 60px;
+  border-bottom: 1px solid rgba(27, 44, 66, 0.10);
+  opacity: 0;
+  transform: translateX(20px);
+  /* Hover-only transitions for padding/background. Entrance is animated. */
+  transition: padding 0.3s var(--ease), background 0.3s var(--ease);
+  z-index: 2;
+}
+
+/* Dot on the line — pops in with cubic-bezier overshoot on .is-visible */
+.schedule__row::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 1.85rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--sunset-cream);
+  border: 3px solid var(--sunset-coral);
+  transform: scale(0);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+  z-index: 3;
+}
+
+/* When the schedule enters the viewport, each row + dot animates in. */
+.schedule.is-visible .schedule__row {
+  animation: scheduleRowIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.schedule.is-visible .schedule__row::before {
+  animation: scheduleDotPop 0.5s cubic-bezier(0.4, 1.7, 0.6, 1) forwards;
+}
+
+@keyframes scheduleRowIn {
+  to { opacity: 1; transform: none; }
+}
+@keyframes scheduleDotPop {
+  to { transform: scale(1); }
+}
+
+/* Stagger per row — rows just before their dots */
+.schedule.is-visible .schedule__row:nth-child(1)  { animation-delay: 0.18s; }
+.schedule.is-visible .schedule__row:nth-child(2)  { animation-delay: 0.28s; }
+.schedule.is-visible .schedule__row:nth-child(3)  { animation-delay: 0.38s; }
+.schedule.is-visible .schedule__row:nth-child(4)  { animation-delay: 0.48s; }
+.schedule.is-visible .schedule__row:nth-child(5)  { animation-delay: 0.58s; }
+.schedule.is-visible .schedule__row:nth-child(6)  { animation-delay: 0.68s; }
+.schedule.is-visible .schedule__row:nth-child(7)  { animation-delay: 0.78s; }
+.schedule.is-visible .schedule__row:nth-child(8)  { animation-delay: 0.88s; }
+.schedule.is-visible .schedule__row:nth-child(9)  { animation-delay: 0.98s; }
+.schedule.is-visible .schedule__row:nth-child(1)::before  { animation-delay: 0.24s; }
+.schedule.is-visible .schedule__row:nth-child(2)::before  { animation-delay: 0.34s; }
+.schedule.is-visible .schedule__row:nth-child(3)::before  { animation-delay: 0.44s; }
+.schedule.is-visible .schedule__row:nth-child(4)::before  { animation-delay: 0.54s; }
+.schedule.is-visible .schedule__row:nth-child(5)::before  { animation-delay: 0.64s; }
+.schedule.is-visible .schedule__row:nth-child(6)::before  { animation-delay: 0.74s; }
+.schedule.is-visible .schedule__row:nth-child(7)::before  { animation-delay: 0.84s; }
+.schedule.is-visible .schedule__row:nth-child(8)::before  { animation-delay: 0.94s; }
+.schedule.is-visible .schedule__row:nth-child(9)::before  { animation-delay: 1.04s; }
+
+/* Hover — content shifts right, soft coral wash, dot fills */
+.schedule__row:hover {
+  padding-left: 70px;
+  background: rgba(216, 81, 74, 0.04);
+}
+.schedule__row:hover::before {
+  background: var(--sunset-coral);
+  border-color: var(--sunset-red);
+}
+
+.schedule__time {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--sunset-coral);
+  letter-spacing: 0.03em;
+}
+.schedule__content { min-width: 0; }
+.schedule__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  letter-spacing: -0.008em;
+  line-height: 1.15;
+  margin: 0 0 0.3em;
+  color: var(--deep-navy);
+}
+.schedule__desc {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+  margin: 0;
+  max-width: 42em;
+}
+.schedule__tag {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sunset-orange-deep);
+  font-weight: 700;
+  white-space: nowrap;
+  padding-top: 0.4em;
+}
+
+/* Feature row (last) — bigger filled dot, bigger title */
+.schedule__row--feature::before {
+  background: var(--sunset-orange);
+  border-color: var(--sunset-coral);
+  width: 24px;
+  height: 24px;
+  left: 12px;
+  top: 1.7rem;
+}
+.schedule__row--feature .schedule__title {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+}
+.schedule__row--feature .schedule__tag {
+  color: var(--sunset-coral);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schedule::before { transform: scaleY(1); transition: none; }
+  .schedule.is-visible .schedule__row,
+  .schedule.is-visible .schedule__row::before { animation: none; }
+  .schedule__row { opacity: 1; transform: none; }
+  .schedule__row::before { transform: scale(1); }
+}
+
+@media (max-width: 720px) {
+  .schedule__row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "time tag" "content content";
+    gap: 0.6rem var(--s-3);
+    padding: 1.3rem 0 1.3rem 44px;
+  }
+  .schedule__time { grid-area: time; }
+  .schedule__tag { grid-area: tag; padding-top: 0.2em; }
+  .schedule__content { grid-area: content; }
+  .schedule__row:hover { padding-left: 50px; }
+  .schedule__row::before { left: 8px; top: 1.55rem; width: 14px; height: 14px; }
+  .schedule__row--feature::before { left: 5px; top: 1.4rem; width: 20px; height: 20px; }
+  .schedule::before { left: 14px; }
+}
+
+/* ============================================================
+   HERO -- SPLIT VARIANT
+   Used on conference.html so the RCVC year page reads distinctly
+   from the homepage's full-bleed video hero. Editorial split:
+   copy + meta + CTAs on the left, an image card with a corner
+   caption stamp on the right.
+============================================================ */
+.hero.hero--split {
+  background: var(--sunset-cream-soft);
+  padding: clamp(3.5rem, 7vw, 6rem) 0 0;
+  min-height: auto;
+}
+.hero--split__inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.hero--split__copy { max-width: 30em; }
+.hero--split__headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5.8vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+  margin: var(--s-4) 0 var(--s-4);
+  color: var(--deep-navy);
+}
+.hero--split__headline .hero__line { display: block; }
+.hero--split__headline .script {
+  color: var(--sunset-coral);
+  font-size: 1.05em;
+  line-height: 0.95;
+  margin-top: 0.15em;
+  display: inline-block;
+}
+.hero--split__copy .lede {
+  margin: var(--s-4) 0 var(--s-5);
+  max-width: 28em;
+}
+.hero--split__meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4) var(--s-5);
+  border-top: 1px solid rgba(27, 44, 66, 0.18);
+  border-bottom: 1px solid rgba(27, 44, 66, 0.18);
+  padding: var(--s-4) 0;
+  margin: 0 0 var(--s-5);
+}
+.hero--split__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.hero--split__meta-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--sunset-orange-deep);
+}
+.hero--split__meta-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--deep-navy);
+  line-height: 1.2;
+}
+.hero--split__meta-sub {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+.hero--split__ctas { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+/* Image card with caption stamp */
+.hero--split__card {
+  position: relative;
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px -28px rgba(27, 44, 66, 0.5),
+              0 8px 18px -8px rgba(27, 44, 66, 0.25);
+  aspect-ratio: 4 / 5;
+}
+.hero--split__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero--split__stamp {
+  position: absolute;
+  left: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  right: clamp(1rem, 2vw, 1.5rem);
+  background: var(--sunset-cream);
+  color: var(--deep-navy);
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 12px 30px -10px rgba(27, 44, 66, 0.4);
+}
+.hero--split__stamp strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.hero--split__stamp .script {
+  color: var(--sunset-coral);
+  font-size: 1.1em;
+}
+.hero--split__stamp span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  line-height: 1.3;
+}
+
+.hero--split .horizon-stripe { margin-top: 0; }
+
+@media (max-width: 880px) {
+  .hero--split__inner {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+  .hero--split__card {
+    aspect-ratio: 16 / 11;
+    order: -1;
+  }
+  .hero--split__meta { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .hero--split__meta { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    OVERLAY BAND (full-bleed image with text on top)
    Used for the "Coming Back in {{year}}" callout.
 ============================================================ */
@@ -1348,13 +1681,38 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
   top: clamp(180px, 18vw, 220px);
   align-self: start;
 }
-.section--why__mark img {
+.section--why__mark img,
+.section--why__mark .travel-stamp {
   width: 100%;
   max-width: 420px;
   height: auto;
   display: block;
   filter: drop-shadow(0 12px 32px rgba(27, 44, 66, 0.18));
 }
+
+/* Travel stamp -- vintage Americana trip badge replacing the logo
+   in the travel section. Pure SVG, design-token coloured. */
+.travel-stamp__ring-outer {
+  fill: none;
+  stroke: var(--sunset-coral);
+  stroke-width: 2.5;
+}
+.travel-stamp__ring-inner {
+  fill: none;
+  stroke: var(--sunset-orange);
+  stroke-width: 1.5;
+}
+.travel-stamp__type {
+  font-family: var(--font-display);
+  font-weight: 400;
+  fill: var(--deep-navy);
+}
+.travel-stamp__star { fill: var(--sunset-coral); }
+.travel-stamp__building-body rect { fill: var(--deep-navy); }
+.travel-stamp__cutouts rect { fill: var(--sunset-cream-soft); }
+.travel-stamp__stripe-1 { fill: var(--sunset-coral); }
+.travel-stamp__stripe-2 { fill: var(--sunset-orange); }
+.travel-stamp__stripe-3 { fill: var(--twilight-blue); }
 .section--why__body { min-width: 0; }
 @media (max-width: 880px) {
   .section--why { grid-template-columns: 1fr; gap: var(--s-4); }
@@ -1520,6 +1878,49 @@ h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; letter
 }
 
 /* ----- Forms ----- */
+
+/* Form mode toggle (sponsorship card on sponsors.html) */
+.form-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0.3rem;
+  background: var(--sunset-cream);
+  border: 1px solid var(--twilight-blue-soft);
+  border-radius: 999px;
+  margin: 0 0 var(--s-4);
+}
+.form-toggle__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.form-toggle__btn:hover { color: var(--deep-navy); }
+.form-toggle__btn.is-active {
+  background: var(--deep-navy);
+  color: var(--sunset-cream-soft);
+  box-shadow: 0 4px 12px -4px rgba(27, 44, 66, 0.35);
+}
+.form-toggle__btn:focus-visible {
+  outline: 2px solid var(--sunset-coral);
+  outline-offset: 2px;
+}
+.form-pane { display: none; }
+.form-pane.is-active { display: block; }
+
+@media (max-width: 480px) {
+  .form-toggle__btn { font-size: 0.85rem; padding: 0.65rem 0.6rem; }
+}
 
 .form-row { display: grid; gap: var(--s-2); margin-bottom: var(--s-3); }
 .form-row--2 { grid-template-columns: 1fr 1fr; gap: var(--s-3); }
@@ -1727,9 +2128,12 @@ body.is-ready .hero--cinematic .hero__meta     { opacity: 1; transform: none; tr
   transform: translateY(28px);
   transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
 }
-body.is-ready .hero--cinematic .hero__line:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.35s; }
-body.is-ready .hero--cinematic .hero__line:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.55s; }
-body.is-ready .hero--cinematic .hero__line:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.75s; }
+body.is-ready .hero--cinematic .hero__line:nth-child(1),
+body.is-ready .hero--split .hero__line:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.35s; }
+body.is-ready .hero--cinematic .hero__line:nth-child(2),
+body.is-ready .hero--split .hero__line:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.55s; }
+body.is-ready .hero--cinematic .hero__line:nth-child(3),
+body.is-ready .hero--split .hero__line:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.75s; }
 .hero--cinematic .hero__line:nth-child(3) .script {
   position: relative;
   display: inline-block;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RCVC {{year}} &ndash; Rocket City Vet Conference</title>
+  <title>RCVC 2027 &ndash; Rocket City Vet Conference</title>
   <meta name="description" content="The full Rocket City Vet Conference {{year}} day: eight hours of RACE-approved CE, hot meals, vendor hall, and travel info for Huntsville, Alabama.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,54 +16,261 @@
 <div data-include="header"></div>
 
 <!-- ============================================================
-     HERO + SECTION 1: THE BASICS
+     SECTION 1: HERO (split editorial — distinct from homepage)
+     Conference year page is the identity / "what is this event"
+     moment. Copy + meta + CTAs on the left, image card with corner
+     caption stamp on the right. Cream-soft background, no video.
+     Distinct vocabulary from the homepage's full-bleed cinematic.
 ============================================================ -->
-<section class="hero">
-  <div class="container">
-    <div style="text-align: center; max-width: 44em; margin: 0 auto;">
-      <span class="tagline"><span class="dot"></span> One Saturday <span class="dot"></span> Eight hours of CE <span class="dot"></span></span>
-      <h1 class="text-balance mt-6" style="font-size: clamp(3rem, 8vw, 6rem);">
-        RCVC <span class="script" style="font-size: 1em; color: var(--sunset-coral);">{{year}}</span>
+<section class="hero hero--split">
+  <div class="container hero--split__inner">
+    <div class="hero--split__copy reveal">
+      <span class="tagline"><span class="dot"></span> RCVC {{year}} <span class="dot"></span> Huntsville, Alabama <span class="dot"></span></span>
+      <h1 class="hero--split__headline text-balance">
+        <span class="hero__line">The full</span>
+        <span class="hero__line">Rocket City day.</span>
+        <span class="hero__line">RCVC <span class="script">{{year}}.</span></span>
       </h1>
-      <p class="lede mt-6" style="margin-left: auto; margin-right: auto;">
-        The full Rocket City day, same Saturday format that's worked since year one.
-        Date, speakers, and registration land here as {{founderFirst}} finalizes the lineup.
+      <p class="lede">
+        The same Saturday format that&rsquo;s worked since year one. Date, speakers, and
+        registration land here as {{founderFirst}} finalizes the lineup.
       </p>
-    </div>
 
-    <div class="cards cards--auto mt-8" style="max-width: 1000px; margin-left: auto; margin-right: auto;">
-      <div class="card text-center">
-        <h4>When</h4>
-        <p style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--deep-navy); margin: 0;">
-          {{date}}
-        </p>
-        <p class="muted" style="margin: 0.3rem 0 0;">{{doors}}</p>
+      <div class="hero--split__meta">
+        <div class="hero--split__meta-item">
+          <span class="hero--split__meta-label">When</span>
+          <span class="hero--split__meta-value">{{date}}</span>
+          <span class="hero--split__meta-sub">{{doors}}</span>
+        </div>
+        <div class="hero--split__meta-item">
+          <span class="hero--split__meta-label">Where</span>
+          <span class="hero--split__meta-value">{{venue}}</span>
+          <span class="hero--split__meta-sub">{{venueArea}}, {{city}}</span>
+        </div>
+        <div class="hero--split__meta-item">
+          <span class="hero--split__meta-label">Format</span>
+          <span class="hero--split__meta-value">{{ceHours}} of <span style="white-space: nowrap;">{{raceApproved}} CE</span></span>
+          <span class="hero--split__meta-sub">{{format}}, in-person</span>
+        </div>
+        <div class="hero--split__meta-item">
+          <span class="hero--split__meta-label">Tickets</span>
+          <span class="hero--split__meta-value">Coming soon</span>
+          <span class="hero--split__meta-sub">Pricing released with date</span>
+        </div>
       </div>
-      <div class="card text-center">
-        <h4>Where</h4>
-        <p style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--deep-navy); margin: 0;">
-          {{venue}}
-        </p>
-        <p class="muted" style="margin: 0.3rem 0 0;">{{venueArea}}, {{city}}</p>
-      </div>
-      <div class="card text-center">
-        <h4>Format</h4>
-        <p style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--deep-navy); margin: 0;">
-          {{format}}
-        </p>
-        <p class="muted" style="margin: 0.3rem 0 0;">{{ceHours}} RACE-approved CE</p>
-      </div>
-      <div class="card text-center">
-        <h4>Tickets</h4>
-        <p style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--deep-navy); margin: 0;">
-          Coming soon
-        </p>
-        <p class="muted" style="margin: 0.3rem 0 0;">Pricing released with date</p>
+
+      <div class="hero--split__ctas">
+        <a href="{{registerUrl}}" class="btn btn--primary btn--lg" data-register>{{registerLabel}}</a>
+        <a href="faqs.html" class="btn btn--ghost btn--lg">Read the FAQ</a>
       </div>
     </div>
 
-    <p class="text-center mt-8">
-      <a href="{{registerUrl}}" class="btn btn--primary btn--lg" data-register>{{registerLabel}}</a>
+    <figure class="hero--split__card reveal">
+      <img src="assets/img/photos/attendees-listening.jpg"
+           alt="Veterinarians listening to a session at a previous Rocket City conference."
+           loading="eager">
+      <figcaption class="hero--split__stamp">
+        <strong>RCVC <span class="script">{{year}}</span></strong>
+        <span>The full day, on one page.</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="horizon-stripe" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2: WHAT YOU GET (amenity-grid)
+     The "what your ticket gets you" list, lifted from the old
+     numbered list into the homepage's amenity-grid vocabulary.
+     Single-sentence verbatim copy from the PDF goes in the headline
+     slot; eyebrow labels are new meta-labels per session rules.
+============================================================ -->
+<section class="section section--cream-soft">
+  <div class="container">
+    <div class="container-tight" style="padding: 0;">
+      <span class="eyebrow"><span class="dot"></span> What you get</span>
+      <h2 class="text-balance">The full Rocket City day, <span class="script">same as years past.</span></h2>
+    </div>
+
+    <ol class="amenity-grid mt-8 reveal-stagger">
+      <li class="amenity-grid__cell reveal" style="--i: 0;">
+        <span class="amenity-grid__label">CE</span>
+        <h3 class="amenity-grid__head">Eight hours of RACE-approved CE.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+      </li>
+
+      <li class="amenity-grid__cell reveal" style="--i: 1;">
+        <span class="amenity-grid__label">The Meal</span>
+        <h3 class="amenity-grid__head">Hot breakfast, hot lunch, an afternoon snack.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+      </li>
+
+      <li class="amenity-grid__cell reveal" style="--i: 2;">
+        <span class="amenity-grid__label">Care</span>
+        <h3 class="amenity-grid__head">Coffee, water, and bathroom care stations available all day.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+      </li>
+
+      <li class="amenity-grid__cell reveal" style="--i: 3;">
+        <span class="amenity-grid__label">Swag</span>
+        <h3 class="amenity-grid__head">The full conference swag bag, including the year&rsquo;s t-shirt and candle.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+      </li>
+
+      <li class="amenity-grid__cell reveal" style="--i: 4;">
+        <span class="amenity-grid__label">Vendor Hall</span>
+        <h3 class="amenity-grid__head">Access to the vendor hall throughout the day.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+      </li>
+
+      <li class="amenity-grid__cell reveal" style="--i: 5;">
+        <span class="amenity-grid__label">Social</span>
+        <h3 class="amenity-grid__head">Optional end-of-day social with food and drinks included.</h3>
+        <div class="amenity-grid__rule" aria-hidden="true"></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<div class="horizon-stripe" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ============================================================
+     SECTION 3: SPEAKERS (cinematic overlay-band)
+     Replaces the four empty placeholder cards. Full-bleed
+     attendee-portrait image + navy scrim + big editorial
+     "announced soon" moment with Style Script accent. Reads as
+     intentional anticipation, not absence.
+============================================================ -->
+<section class="overlay-band reveal" id="speakers" aria-label="{{year}} speaker lineup">
+  <img class="overlay-band__image"
+       src="assets/img/photos/attendee-portrait.jpg"
+       alt=""
+       aria-hidden="true"
+       loading="lazy">
+  <div class="overlay-band__scrim" aria-hidden="true"></div>
+
+  <div class="container overlay-band__content">
+    <span class="eyebrow"><span class="dot"></span> {{year}} speakers</span>
+    <h2 class="overlay-band__head text-balance">
+      Lineup<br>
+      <span class="script">announced soon.</span>
+    </h2>
+    <div class="overlay-band__rule" aria-hidden="true"></div>
+    <p>
+      Want to be the first to know? Drop your email on the
+      <a href="index.html#notify" style="color: var(--sunset-orange);">homepage</a>
+      and you&rsquo;ll hear from {{founderFirst}} the moment the lineup goes live.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: CE SCHEDULE (ledger)
+     The shape of a Rocket City Saturday as a vertical editorial
+     ledger: time on the left, headline + coral rule + body on the
+     right, hairline dividers between rows. Last row (social) is
+     marked as the feature row.
+============================================================ -->
+<section class="section section--cream">
+  <div class="container-tight">
+    <span class="eyebrow"><span class="dot"></span> CE schedule</span>
+    <h2 class="text-balance">A full Saturday, <span class="script">mapped to the minute.</span></h2>
+    <p class="lede mt-6">
+      The {{year}} lecture schedule will be released here once speakers are confirmed.
+      Until then, here&rsquo;s the rhythm of a Rocket City day.
+    </p>
+
+    <ol class="schedule mt-8 reveal">
+      <li class="schedule__row">
+        <span class="schedule__time">8:00 AM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Doors open. Hot breakfast.</h3>
+          <p class="schedule__desc">Check in, grab coffee, find your seat.</p>
+        </div>
+        <span class="schedule__tag">60 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">9:00 AM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Morning CE block.</h3>
+          <p class="schedule__desc">Speaker and topic to be announced.</p>
+        </div>
+        <span class="schedule__tag">90 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">10:30 AM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Break. Vendor hall.</h3>
+          <p class="schedule__desc">Coffee, snacks, and unhurried time with the vendors actually worth talking to.</p>
+        </div>
+        <span class="schedule__tag">30 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">11:00 AM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Midday CE block.</h3>
+          <p class="schedule__desc">Speaker and topic to be announced.</p>
+        </div>
+        <span class="schedule__tag">90 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">12:30 PM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Hot lunch in the vendor hall.</h3>
+          <p class="schedule__desc">Real meals. Real chairs. Real tables.</p>
+        </div>
+        <span class="schedule__tag">60 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">1:30 PM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Afternoon CE block.</h3>
+          <p class="schedule__desc">Speaker and topic to be announced.</p>
+        </div>
+        <span class="schedule__tag">90 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">3:00 PM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Break. Vendor hall.</h3>
+          <p class="schedule__desc">Second pass through the hall. Last chance for the conversations you didn&rsquo;t get to in the morning.</p>
+        </div>
+        <span class="schedule__tag">30 min</span>
+      </li>
+
+      <li class="schedule__row">
+        <span class="schedule__time">3:30 PM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Final CE block.</h3>
+          <p class="schedule__desc">Speaker and topic to be announced.</p>
+        </div>
+        <span class="schedule__tag">90 min</span>
+      </li>
+
+      <li class="schedule__row schedule__row--feature">
+        <span class="schedule__time">5:00 PM</span>
+        <div class="schedule__content">
+          <h3 class="schedule__title">Day closes. Optional social begins.</h3>
+          <p class="schedule__desc">Food and drinks for anyone who wants to stay.</p>
+        </div>
+        <span class="schedule__tag">90 min</span>
+      </li>
+    </ol>
+
+    <p class="muted mt-6" style="font-size: 0.92rem;">
+      Above is the structural shape of the day. Specific lectures will fill in as the
+      {{year}} lineup is confirmed.
     </p>
   </div>
 </section>
@@ -73,216 +280,136 @@
 </div>
 
 <!-- ============================================================
-     SECTION 2: WHAT YOU GET
+     SECTION 5: VENDOR HALL (feature-band)
+     Mirrors the homepage's vendor-hall feature-band but lives on
+     this page as the conference-day callout. Image-left, text-right.
+============================================================ -->
+<section class="section section--cream">
+  <div class="container">
+    <div class="feature-band feature-band--reverse reveal">
+      <figure class="feature-band__image">
+        <img src="assets/img/photos/vendor-hall.jpg"
+             alt="A working vendor hall with veterinarians browsing equipment and tools."
+             loading="lazy">
+      </figure>
+      <div class="feature-band__text">
+        <span class="eyebrow"><span class="dot"></span> Vendor hall</span>
+        <h2 class="feature-band__head text-balance">A working list of<br>confirmed <span class="script">{{year}} vendors.</span></h2>
+        <div class="feature-band__rule" aria-hidden="true"></div>
+        <p>
+          Vendors will appear here as sponsors finalize. For the full case for sponsoring
+          and the year-round visibility benefit, see the dedicated page.
+        </p>
+        <p>
+          Corporate chains and recruiting firms are not invited. The companies on the floor
+          are here to support independent practices, not pull people out of them.
+        </p>
+        <a href="sponsors.html" class="btn btn--ghost">See current sponsors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon-stripe" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ============================================================
+     SECTION 6: TRAVEL (section--why sticky-logo split)
+     Lifts the travel section from a flat centered paragraph to the
+     homepage's section--why split: sticky logo mark on the left,
+     editorial body with dropcap on the right. The "Take the
+     elevator" line stays as the section's headline moment.
 ============================================================ -->
 <section class="section section--cream-soft">
-  <div class="container-tight">
-    <span class="eyebrow"><span class="dot"></span> What you get</span>
-    <h2 class="text-balance">The full Rocket City day, <span class="script">same as years past.</span></h2>
+  <div class="container section--why">
+    <aside class="section--why__mark">
+      <svg class="travel-stamp" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The West End hotel, Bridge Street Shopping Center, Huntsville, Alabama">
+        <defs>
+          <path id="travelStampTop" d="M 60 200 A 140 140 0 0 1 340 200" fill="none"></path>
+          <path id="travelStampBottom" d="M 60 200 A 140 140 0 0 0 340 200" fill="none"></path>
+        </defs>
 
-    <ul class="mt-8" style="list-style: none; padding: 0; display: grid; gap: var(--s-3); font-size: 1.1rem;">
-      <li style="display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--sunset-coral); font-weight: 600;">01</span>
-        <span>Eight hours of RACE-approved CE.</span>
-      </li>
-      <li style="display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--sunset-coral); font-weight: 600;">02</span>
-        <span>Hot breakfast, hot lunch, an afternoon snack.</span>
-      </li>
-      <li style="display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--sunset-coral); font-weight: 600;">03</span>
-        <span>Coffee, water, and bathroom care stations available all day.</span>
-      </li>
-      <li style="display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--sunset-coral); font-weight: 600;">04</span>
-        <span>The full conference swag bag, including the year's t-shirt and candle.</span>
-      </li>
-      <li style="display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--sunset-coral); font-weight: 600;">05</span>
-        <span>Access to the vendor hall throughout the day.</span>
-      </li>
-      <li style="display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--sunset-coral); font-weight: 600;">06</span>
-        <span>Optional end-of-day social with food and drinks included.</span>
-      </li>
-    </ul>
-  </div>
-</section>
+        <!-- Concentric stamp rings -->
+        <circle cx="200" cy="200" r="190" class="travel-stamp__ring-outer"></circle>
+        <circle cx="200" cy="200" r="172" class="travel-stamp__ring-inner"></circle>
 
-<!-- ============================================================
-     SECTION 3: SPEAKERS (PLACEHOLDER STATE)
-============================================================ -->
-<section class="section section--navy" id="speakers">
-  <div class="container">
-    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2rem, 5vw, 5rem); align-items: center;">
-      <div>
-        <span class="eyebrow" style="color: var(--sunset-orange);"><span class="dot"></span> Speakers</span>
-        <h2 class="text-balance">{{year}} lineup<br><span class="script" style="color: var(--sunset-orange);">announced soon.</span></h2>
-      </div>
-      <div>
-        <p style="font-size: 1.1rem; color: rgba(244, 232, 208, 0.85);">
-          Up to eight speakers per year. {{founderFirst}} is finalizing the {{year}} lineup now.
-          Names, credentials, lecture topics, and headshots will land here as each speaker confirms.
-        </p>
-        <p style="font-size: 1.1rem; color: rgba(244, 232, 208, 0.85);">
-          Want to be notified the moment the lineup goes live? Drop your email on the
-          <a href="index.html#notify" style="color: var(--sunset-orange);">homepage</a>.
-        </p>
-      </div>
-    </div>
+        <!-- Curved type top arc -->
+        <text class="travel-stamp__type" font-size="22" letter-spacing="4">
+          <textPath href="#travelStampTop" startOffset="50%" text-anchor="middle">THE WEST END HOTEL</textPath>
+        </text>
+        <!-- Curved type bottom arc -->
+        <text class="travel-stamp__type" font-size="22" letter-spacing="4">
+          <textPath href="#travelStampBottom" startOffset="50%" text-anchor="middle">HUNTSVILLE &#xb7; ALABAMA</textPath>
+        </text>
 
-    <div class="cards cards--auto mt-8">
-      <div class="card card--feature" style="text-align: center; opacity: 0.85;">
-        <span class="card__num">&hellip;</span>
-        <h3>Speaker one</h3>
-        <p>Topic and bio coming soon.</p>
-      </div>
-      <div class="card card--feature" style="text-align: center; opacity: 0.7;">
-        <span class="card__num">&hellip;</span>
-        <h3>Speaker two</h3>
-        <p>Topic and bio coming soon.</p>
-      </div>
-      <div class="card card--feature" style="text-align: center; opacity: 0.55;">
-        <span class="card__num">&hellip;</span>
-        <h3>Speaker three</h3>
-        <p>Topic and bio coming soon.</p>
-      </div>
-      <div class="card card--feature" style="text-align: center; opacity: 0.4;">
-        <span class="card__num">&hellip;</span>
-        <h3>And more</h3>
-        <p>Up to eight per year.</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Side stars flanking the building -->
+        <text x="56" y="208" class="travel-stamp__star" font-size="28" text-anchor="middle">&#x2605;</text>
+        <text x="344" y="208" class="travel-stamp__star" font-size="28" text-anchor="middle">&#x2605;</text>
 
-<!-- ============================================================
-     SECTION 4: CE SCHEDULE (PLACEHOLDER STATE)
-============================================================ -->
-<section class="section section--cream">
-  <div class="container-tight">
-    <span class="eyebrow"><span class="dot"></span> CE schedule</span>
-    <h2 class="text-balance">A full Saturday, mapped to the minute.</h2>
-    <p class="lede mt-6">
-      The {{year}} lecture schedule will be released here once speakers are confirmed.
-      Until then, here's the rhythm of a Rocket City day:
-    </p>
+        <!-- Hotel building silhouette -->
+        <g class="travel-stamp__building-body">
+          <rect x="148" y="115" width="104" height="10" rx="1"></rect>
+          <rect x="156" y="125" width="88" height="130"></rect>
+        </g>
+        <!-- Cream cutouts: windows + door -->
+        <g class="travel-stamp__cutouts">
+          <rect x="160" y="138" width="12" height="14"></rect>
+          <rect x="178" y="138" width="12" height="14"></rect>
+          <rect x="196" y="138" width="12" height="14"></rect>
+          <rect x="214" y="138" width="12" height="14"></rect>
+          <rect x="160" y="162" width="12" height="14"></rect>
+          <rect x="178" y="162" width="12" height="14"></rect>
+          <rect x="196" y="162" width="12" height="14"></rect>
+          <rect x="214" y="162" width="12" height="14"></rect>
+          <rect x="160" y="186" width="12" height="14"></rect>
+          <rect x="178" y="186" width="12" height="14"></rect>
+          <rect x="196" y="186" width="12" height="14"></rect>
+          <rect x="214" y="186" width="12" height="14"></rect>
+          <rect x="193" y="218" width="14" height="37" rx="1"></rect>
+        </g>
 
-    <div class="mt-8" style="display: grid; gap: 0; border-top: 1px solid var(--twilight-blue-soft);">
-      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--twilight-blue-soft); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.3rem; color: var(--sunset-coral); font-weight: 500;">8:00 AM</span>
-        <div>
-          <h3 style="margin: 0 0 0.2em;">Doors open. Hot breakfast.</h3>
-          <p class="muted" style="margin: 0;">Check in, grab coffee, find your seat.</p>
-        </div>
-      </div>
-      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--twilight-blue-soft); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.3rem; color: var(--sunset-coral); font-weight: 500;">9:00 AM</span>
-        <div>
-          <h3 style="margin: 0 0 0.2em;">CE blocks begin.</h3>
-          <p class="muted" style="margin: 0;">Speaker and topic to be announced.</p>
-        </div>
-      </div>
-      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--twilight-blue-soft); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.3rem; color: var(--sunset-coral); font-weight: 500;">12:30 PM</span>
-        <div>
-          <h3 style="margin: 0 0 0.2em;">Hot lunch in the vendor hall.</h3>
-          <p class="muted" style="margin: 0;">Real meals. Real chairs. Real tables.</p>
-        </div>
-      </div>
-      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--twilight-blue-soft); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.3rem; color: var(--sunset-coral); font-weight: 500;">2:00 PM</span>
-        <div>
-          <h3 style="margin: 0 0 0.2em;">Afternoon CE.</h3>
-          <p class="muted" style="margin: 0;">Speaker and topic to be announced.</p>
-        </div>
-      </div>
-      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--s-4); padding: var(--s-4) 0; border-bottom: 1px solid var(--twilight-blue-soft); align-items: baseline;">
-        <span style="font-family: var(--font-display); font-size: 1.3rem; color: var(--sunset-coral); font-weight: 500;">5:00 PM</span>
-        <div>
-          <h3 style="margin: 0 0 0.2em;">Day closes. Optional social begins.</h3>
-          <p class="muted" style="margin: 0;">Food and drinks for anyone who wants to stay.</p>
-        </div>
-      </div>
-    </div>
-
-    <p class="muted mt-6" style="font-size: 0.92rem;">
-      Above is the structural shape of the day. Specific lectures will fill in as the
-      {{year}} lineup is confirmed.
-    </p>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 5: LABS AND WORKSHOPS
-============================================================ -->
-<section class="section section--cream-soft" id="labs">
-  <div class="container-tight text-center">
-    <span class="eyebrow"><span class="dot"></span> Labs and workshops</span>
-    <h2 class="text-balance">Hands-on options for {{year}}.</h2>
-    <p class="lede mt-6" style="margin-left: auto; margin-right: auto;">
-      Whether {{year}} includes hands-on labs or workshops in addition to lecture CE is
-      being decided now. Details will land here once confirmed.
-    </p>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 6: VENDOR HALL CALLOUT
-============================================================ -->
-<section class="section section--navy">
-  <div class="container" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2rem, 5vw, 5rem); align-items: center;">
-    <div>
-      <span class="eyebrow" style="color: var(--sunset-orange);"><span class="dot"></span> Vendor hall</span>
-      <h2 class="text-balance">A working list of confirmed {{year}} vendors.</h2>
-    </div>
-    <div>
-      <p style="font-size: 1.1rem; color: rgba(244, 232, 208, 0.85);">
-        Vendors will appear here as sponsors finalize. For the full case for sponsoring
-        and the year-round visibility benefit, see the dedicated page.
-      </p>
-      <p class="mt-6">
-        <a href="sponsors.html" class="btn btn--orange">See current sponsors</a>
+        <!-- Horizon stripe ground line, echoing the global component -->
+        <g class="travel-stamp__horizon">
+          <rect x="108" y="265" width="184" height="3" class="travel-stamp__stripe-1"></rect>
+          <rect x="108" y="270" width="184" height="2" class="travel-stamp__stripe-2"></rect>
+          <rect x="108" y="274" width="184" height="2" class="travel-stamp__stripe-3"></rect>
+        </g>
+      </svg>
+    </aside>
+    <div class="section--why__body reveal">
+      <span class="eyebrow"><span class="dot"></span> Travel</span>
+      <h2 class="text-balance">Book a room. <span class="script">Walk to the conference.</span></h2>
+      <p class="lede mt-6 dropcap">
+        The West End is part of the Bridge Street Shopping Center, a lifestyle center with
+        restaurants, shopping, and a movie theater. Out-of-town attendees can book a room
+        at the hotel and walk to the conference. Family members not attending the conference
+        have plenty to do within the same complex.
       </p>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     SECTION 7: TRAVEL
-============================================================ -->
-<section class="section section--cream">
-  <div class="container-tight">
-    <span class="eyebrow"><span class="dot"></span> Travel</span>
-    <h2 class="text-balance">Take the elevator to the conference.</h2>
-    <p class="lede mt-6">
-      The West End is part of the Bridge Street Shopping Center, a lifestyle center with
-      restaurants, shopping, and a movie theater. Out-of-town attendees can book a room
-      at the hotel and walk to the conference. Family members not attending the conference
-      have plenty to do within the same complex.
-    </p>
-    <p class="lede">
-      Hotel block, discount code, or recommended booking link will be confirmed before
-      {{year}} registration opens.
-    </p>
-  </div>
-</section>
-
-<!-- ============================================================
-     SECTION 8: QUESTIONS
+     SECTION 7: QUESTIONS (navy closer)
+     Mirrors the homepage closer rhythm: tagline + big editorial
+     headline with Style Script accent + lede + two CTAs.
 ============================================================ -->
 <section class="section section--navy text-center">
-  <div class="container-tight">
-    <h2 class="text-balance" style="font-size: clamp(2rem, 4vw, 3.2rem);">
-      Questions?
+  <div class="container-tight reveal">
+    <span class="tagline" style="color: var(--sunset-orange);">
+      <span class="dot"></span> Still wondering? <span class="dot"></span>
+    </span>
+    <h2 class="text-balance mt-6" style="font-size: clamp(2rem, 4.5vw, 3.4rem);">
+      Most of it&rsquo;s already <span class="script" style="color: var(--sunset-orange);">answered.</span>
     </h2>
     <p class="lede mt-6" style="margin-left: auto; margin-right: auto;">
-      Most common questions are answered on the FAQ page. If yours isn't there,
+      The FAQ covers the most common questions. If yours isn&rsquo;t there,
       {{founderFirst}} is the right person to ask.
     </p>
     <p class="mt-6" style="display: flex; gap: var(--s-2); justify-content: center; flex-wrap: wrap;">
       <a href="faqs.html" class="btn btn--orange">Read the FAQ</a>
-      <a href="mailto:{{contactEmail}}" class="btn btn--ghost" style="color: var(--sunset-cream-soft); border-color: var(--sunset-cream-soft);">Email {{founderFirst}}</a>
+      <a href="mailto:{{contactEmail}}" class="btn btn--cinema-ghost">Email {{founderFirst}}</a>
     </p>
   </div>
 </section>

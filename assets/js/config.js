@@ -26,10 +26,10 @@ window.RCVC_CONFIG = {
   registerLabel: 'Registration opens soon',
   registerOpen: false,
 
-  contactEmail: 'hello@rocketcityvetconference.com',
+  contactEmail: 'ausweetdvm@gmail.com',
   sponsorEmail: 'sponsors@rocketcityvetconference.com',
 
   founderName: 'Dr. Rebecca Sweet',
-  founderFirst: 'Rebecca',
+  founderFirst: 'Dr. Rebecca Sweet',
   founderLink: 'https://greencovepet.com/team/'
 };

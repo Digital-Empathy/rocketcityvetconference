@@ -228,7 +228,54 @@ Tried recoloring the white parts of the logo to navy for use on section 2's crea
 
 ## Pending Tasks
 - User review of all 4 pages in browser at `localhost:4321`
-- Fill in real content (date, emails, RSVPify URL, speakers, schedule) as Rebecca confirms
+- Fill in real content (date, RSVPify URL, speakers, schedule) as Dr. Sweet confirms
 - Wire forms to backend (Netlify Forms? FormSubmit? Backend TBD)
 - Add real sponsor logos when received
-- GitHub repo + Vercel deploy (waiting on user "commit" trigger)
+- Vercel deploy (when ready to launch)
+
+## 2026-05-15 session -- conference.html + sponsors.html uplift
+
+### conference.html
+- **Hero rebuilt as `.hero--split` editorial.** Distinct from the homepage's full-bleed video. Cream-soft background; left column has tagline + 3-line Coustard headline ("The full / Rocket City day. / RCVC 2027.") with year in Style Script; 4-up meta strip (When/Where/Format/Tickets) inside a hairlined panel; primary Register CTA + ghost "Read the FAQ". Right column is a rounded image card (`attendees-listening.jpg`) with a corner caption stamp "RCVC 2027 / The full day, on one page." `.hero__line` per-line reveal was already scoped to `.hero--cinematic`; widened the selector to also cover `.hero--split` so the staggered fade-in works on both.
+- **"Format" meta value** now reads "Eight hours of RACE-approved CE" (templated via `{{ceHours}} of {{raceApproved}} CE`), sub "One Saturday, in-person". "RACE-approved CE" wrapped in a `nowrap` span so the line break happens cleanly before the phrase.
+- **Hero page title** hardcoded to "RCVC 2027" because `includes.js` only walks `document.body` -- the `{{year}}` token in `<title>` was rendering raw. Hardcoded for this page; annual rotation needs a manual update OR a small includes.js patch.
+- **What you get** -> `.amenity-grid` 6 cells (CE / The Meal / Care / Swag / Vendor Hall / Social). Eyebrow + one-line Coustard headline + coral rule per cell. No body copy because the source PDF is single-sentence per item.
+- **Speakers** -> `.overlay-band` cinematic with `attendee-portrait.jpg` background, navy scrim, editorial headline "Lineup / announced soon." (Style Script on "announced soon"). Removed the founder-finalizing paragraph per user request; just the eyebrow + headline + the "drop your email on the homepage" prompt.
+- **CE Schedule** went through two iterations:
+  1. First attempt: `.ledger` (vertical 2-col rows). User rejected, said "I like how we did a timeline in the archived version."
+  2. Final: new `.schedule` component -- **animated vertical timeline.** Coral-to-orange gradient line down the left edge that draws in via `transform: scaleY` on `.is-visible`. Each row gets a circular cream-filled dot (3px coral ring) on the line via `::before`, popping in with cubic-bezier overshoot. Rows themselves slide in from the right with opacity fade, staggered ~100ms. 9 rows including breaks/vendor-hall passes. Last row (5:00 PM social) gets `.schedule__row--feature` (bigger filled-orange dot, larger title). All animation respects `prefers-reduced-motion`. CSS additions are in `styles.css` right after `.ledger`.
+- **Labs and workshops section removed entirely** (user request).
+- **Vendor hall** -> `.feature-band--reverse` (image-left, text-right) reusing `vendor-hall.jpg`. Same component as homepage section 6 but on a different background tone.
+- **Travel** -> `.section--why` sticky split. Headline changed from "Take the elevator to the conference." (user rejected) -> "Book a room. *Walk to the conference.*" (verbatim from body). The sticky logo was replaced with a custom **inline-SVG vintage stamp badge** (`.travel-stamp`): double-ring (coral outer, orange inner), curved type "THE WEST END HOTEL" (top arc) + "HUNTSVILLE * ALABAMA" (bottom arc), coral stars flanking, navy hotel silhouette with cream-soft window cutouts, horizon-stripe ground line. All token-coloured via classed SVG elements; no hex colours inside the SVG markup. Replaces the RCVC logo that was previously sitting there. CSS-only sizing (max-width 420px) so it inherits the same drop-shadow as the existing `.section--why__mark img` rule.
+- **Closer "Questions?"** simplified. Headline "Most of it's already *answered.*" with Style Script accent. Read the FAQ (orange) + Email Dr. Rebecca Sweet (cinema-ghost) CTAs.
+- **Bug fixed: orange CTA was invisible on navy section.** The global `.section--navy a { color: var(--sunset-orange); }` rule was overriding button text colour, so the `.btn--orange` had orange-on-orange text. Scoped the rule to `a:not(.btn)` so inline text links still get the override but buttons keep their own typography. Fix applied to `styles.css` -- benefits every navy section across the site.
+
+### sponsors.html
+- **Full rewrite to type-driven vocabulary.** Distinct from homepage (cinematic video) and conference (split with image card). No images on this page; carries on the design system's typographic rhythm (Coustard + Style Script + eyebrows + horizon stripes + coral rules).
+- **Sections (7 -> 5 after merge):**
+  1. Pure-type hero -- left-aligned Coustard + Style Script headline "A vendor hall / *built for veterinarians,* / not for recruiters." (script on middle line, ` <br>` forces clean 3-line break)
+  2. `.section--why` sticky-logo split + dropcap body + pull-quote (initially had `--scroll-bloom` but removed -- the 9-16rem margin-top/bottom on bloomed state left a ~250px dead zone before the next section, didn't read well on this page)
+  3. Navy editorial band -- "One day of conference. / *Twelve months of visibility.*" with staggered body paragraphs
+  4. 2 cards side-by-side -- All Sponsors (cream) + Limited Top-tier (navy feature card)
+  5. **Merged sponsorship form** (was 2 separate form sections in the first pass; user said "two forms back to back, I don't like that"). One `.card` with a pill toggle at the top (`.form-toggle` + `.form-toggle__btn`) that swaps between two `.form-pane`s (inquiry / logo upload). Inquiry form has the coral primary button "Send inquiry"; logo upload form has the orange "Send logo to Dr. Rebecca Sweet" button. Vanilla-JS toggle inline at the bottom of `sponsors.html` -- honours `#logo-upload` and `#sponsor-inquiry` URL fragments on load + `hashchange` so existing deep links from `faqs.html` and `conference.html` still resolve. Both fragment IDs anchor to this single section. **Saved ~900px of vertical scroll** vs the two-section layout.
+  6. Navy closer "The 2027 list is *updating.*" + "Become a 2027 sponsor" CTA
+- **Hero headline iteration:** first attempt was `<span class="script">not for recruiters.</span>` -- user wanted the script on "built for veterinarians," instead. Swapped. Then widened container max-width from 42em -> 52em and reduced max font-size 5.4rem -> 4.8rem so the headline reads in 3 clean lines instead of 4 with an orphan.
+- **Horizon stripe** added between the merged form section and the navy closer for visual rhythm.
+
+### Site-wide config changes
+- **`config.js` `founderFirst`** changed from `"Rebecca"` to `"Dr. Rebecca Sweet"`. User wanted every reference to "Rebecca" to render as the full title-name. The variable name is now slightly misleading (it's no longer the "first name") but every `{{founderFirst}}` template usage across all 4 pages now renders "Dr. Rebecca Sweet". Verified each usage reads naturally; the only awkward case was `{{founderFirst}}'s still finalizing` in the homepage closer -- changed to `{{founderFirst}} is still finalizing`. Footer column heading also updated to "Reach Dr. Rebecca Sweet" (literal in `components/footer.html`). `faqs.html` meta description updated similarly.
+- **`config.js` `contactEmail`** changed from `hello@rocketcityvetconference.com` -> `ausweetdvm@gmail.com` (real client email). `sponsorEmail` unchanged.
+- **Minor narrative note (deferred):** homepage origin story now reads "Dr. Rebecca Sweet" twice within ~2 paragraphs (once via `{{founderName}}`, once via `{{founderFirst}}` second beat). Conventional storytelling would swap the second to "she asked why"; user instruction was literal so left as-is. Flag for future tweak if it starts to grate.
+
+### New CSS components added to `styles.css`
+- `.hero--split` + `.hero--split__inner` / `__copy` / `__headline` / `__meta` / `__meta-item` / `__meta-label` / `__meta-value` / `__meta-sub` / `__ctas` / `__card` / `__stamp` -- the split editorial hero used on conference.html
+- `.schedule` + `.schedule__row` (+ `--feature`) / `__time` / `__content` / `__title` / `__desc` / `__tag` -- animated vertical timeline used on conference.html
+- `.travel-stamp` + `__ring-outer` / `__ring-inner` / `__type` / `__star` / `__building-body` / `__cutouts` / `__stripe-1..3` -- inline SVG trip badge for conference.html travel section
+- `.form-toggle` + `.form-toggle__btn` / `.form-pane` -- pill tab toggle for the merged sponsorship form
+
+### Critical fixes
+- `.section--navy a` -> `a:not(.btn)` so orange buttons don't go orange-on-orange (was invisible).
+- `.hero__line` opacity:0 + reveal animation was scoped only to `.hero--cinematic`; widened to also cover `.hero--split` so the per-line stagger fires on the conference hero.
+
+### Pages still on old templated pattern
+- `faqs.html` (next session)
